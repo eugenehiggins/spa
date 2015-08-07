@@ -38,23 +38,16 @@ myApp.service('nameService', function(){
 // for a controller to use a service you must inject it, in this case `nameService`
 myApp.controller('mainController', ['$scope','$log','nameService', function($scope, $log, nameService) {
 
-	// the part of the HTML which is controlled by this controller, which in this case is main.html, has 
-	// an input element that binds itself to this `$scope.name` property by using the directive `ng-model="name"`
-	// this is a one way binding
-	$scope.name = nameService.name;
 
-	// To make it two way it needs to be watched
-	$scope.$watch('name', function(){
-		//update the nameservice to reflect what was typed into the input field
-		nameService.name = $scope.name;
-	});
-
-	$log.log(nameService.name);
-	$log.log(nameService.namelength());
 }])
 
 myApp.controller('secondController', ['$scope','$log', '$routeParams','nameService', function($scope, $log, $routeParams, nameService) {
-	$scope.name = nameService.name;
 
-	$scope.num = $routeParams.num || 1;
-}])
+}]);
+
+myApp.directive ('searchResult', function() {
+	return {
+		templateUrl: 'directives/searchresult.html',
+		replace: true
+	}
+});
